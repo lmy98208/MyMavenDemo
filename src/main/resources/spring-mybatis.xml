@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:property-placeholder location="classpath*:jdbc.properties"/>
+
+    <!-- 用于数据库连接池 -->
+    <bean id="ds" class="com.alibaba.druid.pool.DruidDataSource"  destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="${jdbc.initialSize}" />
+        <property name="minIdle" value="${jdbc.minIdle}" />
+        <property name="maxActive" value="${jdbc.maxActive}" />
+        <property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}" />
+        <property name="maxWait" value="${jdbc.maxWait}" />
+
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="validationQuery" value="${jdbc.validationQuery}" />
+        <property name="testWhileIdle" value="${jdbc.testWhileIdle}" />
+        <property name="testOnBorrow" value="${jdbc.testOnBorrow}" />
+        <property name="testOnReturn" value="${jdbc.testOnReturn}" />
+        <property name="filters" value="${jdbc.filters}" />
+        <property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}" />
+    </bean>
+
+    <!--mybatis 配置-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="ds"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath:mapper/**.xml"/>
+    </bean>
+    <!--Mybatis Mapper接口得扫描-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="com.njnu.dao"/>
+    </bean>
+
+    <bean id="tranMan" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="ds"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="tranMan"/>
+
+</beans>

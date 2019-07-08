@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njnu.dao.ResumeMapper" >
+  <resultMap id="BaseResultMap" type="com.njnu.bean.Resume" >
+    <id column="resume_id" property="resumeId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="graduate_institution" property="graduateInstitution" jdbcType="VARCHAR" />
+    <result column="education_background" property="educationBackground" jdbcType="VARCHAR" />
+    <result column="major" property="major" jdbcType="VARCHAR" />
+    <result column="experience" property="experience" jdbcType="VARCHAR" />
+    <result column="skill" property="skill" jdbcType="VARCHAR" />
+    <result column="honor" property="honor" jdbcType="VARCHAR" />
+    <result column="intention_job" property="intentionJob" jdbcType="VARCHAR" />
+    <result column="intention_to_pay" property="intentionToPay" jdbcType="INTEGER" />
+    <result column="intention_city" property="intentionCity" jdbcType="VARCHAR" />
+    <result column="intention_hiredate" property="intentionHiredate" jdbcType="DATE" />
+    <result column="resume_state" property="resumeState" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    resume_id, user_id, graduate_institution, education_background, major, experience, 
+    skill, honor, intention_job, intention_to_pay, intention_city, intention_hiredate, 
+    resume_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from resume
+    where resume_id = #{resumeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from resume
+    where resume_id = #{resumeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njnu.bean.Resume" >
+    insert into resume (resume_id, user_id, graduate_institution, 
+      education_background, major, experience, 
+      skill, honor, intention_job, 
+      intention_to_pay, intention_city, intention_hiredate, 
+      resume_state)
+    values (#{resumeId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{graduateInstitution,jdbcType=VARCHAR}, 
+      #{educationBackground,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{experience,jdbcType=VARCHAR}, 
+      #{skill,jdbcType=VARCHAR}, #{honor,jdbcType=VARCHAR}, #{intentionJob,jdbcType=VARCHAR}, 
+      #{intentionToPay,jdbcType=INTEGER}, #{intentionCity,jdbcType=VARCHAR}, #{intentionHiredate,jdbcType=DATE}, 
+      #{resumeState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.njnu.bean.Resume" >
+    insert into resume
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resumeId != null" >
+        resume_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="graduateInstitution != null" >
+        graduate_institution,
+      </if>
+      <if test="educationBackground != null" >
+        education_background,
+      </if>
+      <if test="major != null" >
+        major,
+      </if>
+      <if test="experience != null" >
+        experience,
+      </if>
+      <if test="skill != null" >
+        skill,
+      </if>
+      <if test="honor != null" >
+        honor,
+      </if>
+      <if test="intentionJob != null" >
+        intention_job,
+      </if>
+      <if test="intentionToPay != null" >
+        intention_to_pay,
+      </if>
+      <if test="intentionCity != null" >
+        intention_city,
+      </if>
+      <if test="intentionHiredate != null" >
+        intention_hiredate,
+      </if>
+      <if test="resumeState != null" >
+        resume_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resumeId != null" >
+        #{resumeId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="graduateInstitution != null" >
+        #{graduateInstitution,jdbcType=VARCHAR},
+      </if>
+      <if test="educationBackground != null" >
+        #{educationBackground,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null" >
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null" >
+        #{experience,jdbcType=VARCHAR},
+      </if>
+      <if test="skill != null" >
+        #{skill,jdbcType=VARCHAR},
+      </if>
+      <if test="honor != null" >
+        #{honor,jdbcType=VARCHAR},
+      </if>
+      <if test="intentionJob != null" >
+        #{intentionJob,jdbcType=VARCHAR},
+      </if>
+      <if test="intentionToPay != null" >
+        #{intentionToPay,jdbcType=INTEGER},
+      </if>
+      <if test="intentionCity != null" >
+        #{intentionCity,jdbcType=VARCHAR},
+      </if>
+      <if test="intentionHiredate != null" >
+        #{intentionHiredate,jdbcType=DATE},
+      </if>
+      <if test="resumeState != null" >
+        #{resumeState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.njnu.bean.Resume" >
+    update resume
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="graduateInstitution != null" >
+        graduate_institution = #{graduateInstitution,jdbcType=VARCHAR},
+      </if>
+      <if test="educationBackground != null" >
+        education_background = #{educationBackground,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null" >
+        major = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null" >
+        experience = #{experience,jdbcType=VARCHAR},
+      </if>
+      <if test="skill != null" >
+        skill = #{skill,jdbcType=VARCHAR},
+      </if>
+      <if test="honor != null" >
+        honor = #{honor,jdbcType=VARCHAR},
+      </if>
+      <if test="intentionJob != null" >
+        intention_job = #{intentionJob,jdbcType=VARCHAR},
+      </if>
+      <if test="intentionToPay != null" >
+        intention_to_pay = #{intentionToPay,jdbcType=INTEGER},
+      </if>
+      <if test="intentionCity != null" >
+        intention_city = #{intentionCity,jdbcType=VARCHAR},
+      </if>
+      <if test="intentionHiredate != null" >
+        intention_hiredate = #{intentionHiredate,jdbcType=DATE},
+      </if>
+      <if test="resumeState != null" >
+        resume_state = #{resumeState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where resume_id = #{resumeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.njnu.bean.Resume" >
+    update resume
+    set user_id = #{userId,jdbcType=INTEGER},
+      graduate_institution = #{graduateInstitution,jdbcType=VARCHAR},
+      education_background = #{educationBackground,jdbcType=VARCHAR},
+      major = #{major,jdbcType=VARCHAR},
+      experience = #{experience,jdbcType=VARCHAR},
+      skill = #{skill,jdbcType=VARCHAR},
+      honor = #{honor,jdbcType=VARCHAR},
+      intention_job = #{intentionJob,jdbcType=VARCHAR},
+      intention_to_pay = #{intentionToPay,jdbcType=INTEGER},
+      intention_city = #{intentionCity,jdbcType=VARCHAR},
+      intention_hiredate = #{intentionHiredate,jdbcType=DATE},
+      resume_state = #{resumeState,jdbcType=VARCHAR}
+    where resume_id = #{resumeId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njnu.dao.CorporationMapper" >
+  <resultMap id="BaseResultMap" type="com.njnu.bean.Corporation" >
+    <id column="corp_id" property="corpId" jdbcType="INTEGER" />
+    <result column="corp_name" property="corpName" jdbcType="VARCHAR" />
+    <result column="corp_scale" property="corpScale" jdbcType="INTEGER" />
+    <result column="tag" property="tag" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="address_lng_lat" property="addressLngLat" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="full_crop_name" property="fullCropName" jdbcType="VARCHAR" />
+    <result column="legal_person" property="legalPerson" jdbcType="VARCHAR" />
+    <result column="bussiness_scope" property="bussinessScope" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    corp_id, corp_name, corp_scale, tag, address, address_lng_lat, introduction, full_crop_name, 
+    legal_person, bussiness_scope
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from corporation
+    where corp_id = #{corpId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from corporation
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from corporation
+    where corp_id = #{corpId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njnu.bean.Corporation" >
+    insert into corporation (corp_id, corp_name, corp_scale, 
+      tag, address, address_lng_lat, 
+      introduction, full_crop_name, legal_person, 
+      bussiness_scope)
+    values (#{corpId,jdbcType=INTEGER}, #{corpName,jdbcType=VARCHAR}, #{corpScale,jdbcType=INTEGER}, 
+      #{tag,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{addressLngLat,jdbcType=VARCHAR}, 
+      #{introduction,jdbcType=VARCHAR}, #{fullCropName,jdbcType=VARCHAR}, #{legalPerson,jdbcType=VARCHAR}, 
+      #{bussinessScope,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.njnu.bean.Corporation" >
+    insert into corporation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="corpId != null" >
+        corp_id,
+      </if>
+      <if test="corpName != null" >
+        corp_name,
+      </if>
+      <if test="corpScale != null" >
+        corp_scale,
+      </if>
+      <if test="tag != null" >
+        tag,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="addressLngLat != null" >
+        address_lng_lat,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+      <if test="fullCropName != null" >
+        full_crop_name,
+      </if>
+      <if test="legalPerson != null" >
+        legal_person,
+      </if>
+      <if test="bussinessScope != null" >
+        bussiness_scope,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="corpId != null" >
+        #{corpId,jdbcType=INTEGER},
+      </if>
+      <if test="corpName != null" >
+        #{corpName,jdbcType=VARCHAR},
+      </if>
+      <if test="corpScale != null" >
+        #{corpScale,jdbcType=INTEGER},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="addressLngLat != null" >
+        #{addressLngLat,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="fullCropName != null" >
+        #{fullCropName,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPerson != null" >
+        #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="bussinessScope != null" >
+        #{bussinessScope,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.njnu.bean.Corporation" >
+    update corporation
+    <set >
+      <if test="corpName != null" >
+        corp_name = #{corpName,jdbcType=VARCHAR},
+      </if>
+      <if test="corpScale != null" >
+        corp_scale = #{corpScale,jdbcType=INTEGER},
+      </if>
+      <if test="tag != null" >
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="addressLngLat != null" >
+        address_lng_lat = #{addressLngLat,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="fullCropName != null" >
+        full_crop_name = #{fullCropName,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPerson != null" >
+        legal_person = #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="bussinessScope != null" >
+        bussiness_scope = #{bussinessScope,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where corp_id = #{corpId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.njnu.bean.Corporation" >
+    update corporation
+    set corp_name = #{corpName,jdbcType=VARCHAR},
+      corp_scale = #{corpScale,jdbcType=INTEGER},
+      tag = #{tag,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      address_lng_lat = #{addressLngLat,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      full_crop_name = #{fullCropName,jdbcType=VARCHAR},
+      legal_person = #{legalPerson,jdbcType=VARCHAR},
+      bussiness_scope = #{bussinessScope,jdbcType=VARCHAR}
+    where corp_id = #{corpId,jdbcType=INTEGER}
+  </update>
+</mapper>

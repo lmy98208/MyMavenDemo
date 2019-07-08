@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njnu.dao.JobClassifyMapper" >
+  <resultMap id="BaseResultMap" type="com.njnu.bean.JobClassify" >
+    <id column="job_kind_id" property="jobKindId" jdbcType="INTEGER" />
+    <result column="k1" property="k1" jdbcType="VARCHAR" />
+    <result column="k2" property="k2" jdbcType="VARCHAR" />
+    <result column="k3" property="k3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    job_kind_id, k1, k2, k3
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from job_classify
+    where job_kind_id = #{jobKindId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByK1K2"  resultMap="BaseResultMap">
+    select * from job_classify
+    where k1 like #{k1,jdbcType=VARCHAR} and k2 like #{k2,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from job_classify
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from job_classify
+    where job_kind_id = #{jobKindId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njnu.bean.JobClassify" >
+    insert into job_classify (job_kind_id, k1, k2, k3)
+    values (#{jobKindId,jdbcType=INTEGER}, #{k1,jdbcType=VARCHAR}, #{k2,jdbcType=VARCHAR}, 
+      #{k3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.njnu.bean.JobClassify" >
+    insert into job_classify
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jobKindId != null" >
+        job_kind_id,
+      </if>
+      <if test="k1 != null" >
+        k1,
+      </if>
+      <if test="k2 != null" >
+        k2,
+      </if>
+      <if test="k3 != null" >
+        k3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jobKindId != null" >
+        #{jobKindId,jdbcType=INTEGER},
+      </if>
+      <if test="k1 != null" >
+        #{k1,jdbcType=VARCHAR},
+      </if>
+      <if test="k2 != null" >
+        #{k2,jdbcType=VARCHAR},
+      </if>
+      <if test="k3 != null" >
+        #{k3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.njnu.bean.JobClassify" >
+    update job_classify
+    <set >
+      <if test="k1 != null" >
+        k1 = #{k1,jdbcType=VARCHAR},
+      </if>
+      <if test="k2 != null" >
+        k2 = #{k2,jdbcType=VARCHAR},
+      </if>
+      <if test="k3 != null" >
+        k3 = #{k3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where job_kind_id = #{jobKindId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.njnu.bean.JobClassify" >
+    update job_classify
+    set k1 = #{k1,jdbcType=VARCHAR},
+      k2 = #{k2,jdbcType=VARCHAR},
+      k3 = #{k3,jdbcType=VARCHAR}
+    where job_kind_id = #{jobKindId,jdbcType=INTEGER}
+  </update>
+</mapper>

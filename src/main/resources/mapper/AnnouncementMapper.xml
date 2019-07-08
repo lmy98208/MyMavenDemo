@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njnu.dao.AnnouncementMapper" >
+  <resultMap id="BaseResultMap" type="com.njnu.bean.Announcement" >
+    <id column="announcement_id" property="announcementId" jdbcType="INTEGER" />
+    <result column="announcement" property="announcement" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    announcement_id, announcement, time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from announcement
+    where announcement_id = #{announcementId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from announcement
+    where announcement_id = #{announcementId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njnu.bean.Announcement" >
+    insert into announcement (announcement_id, announcement, time
+      )
+    values (#{announcementId,jdbcType=INTEGER}, #{announcement,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.njnu.bean.Announcement" >
+    insert into announcement
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="announcementId != null" >
+        announcement_id,
+      </if>
+      <if test="announcement != null" >
+        announcement,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="announcementId != null" >
+        #{announcementId,jdbcType=INTEGER},
+      </if>
+      <if test="announcement != null" >
+        #{announcement,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.njnu.bean.Announcement" >
+    update announcement
+    <set >
+      <if test="announcement != null" >
+        announcement = #{announcement,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where announcement_id = #{announcementId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.njnu.bean.Announcement" >
+    update announcement
+    set announcement = #{announcement,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP}
+    where announcement_id = #{announcementId,jdbcType=INTEGER}
+  </update>
+</mapper>

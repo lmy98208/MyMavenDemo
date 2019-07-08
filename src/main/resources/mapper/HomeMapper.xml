@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njnu.dao.HomeMapper" >
+  <resultMap id="BaseResultMap" type="com.njnu.bean.Home" >
+    <id column="home_id" property="homeId" jdbcType="INTEGER" />
+    <result column="announcement_ids" property="announcementIds" jdbcType="VARCHAR" />
+    <result column="recjob_ids" property="recjobIds" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="advertisement_ids" property="advertisementIds" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    home_id, announcement_ids, recjob_ids, title, advertisement_ids
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from home
+    where home_id = #{homeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from home
+    where home_id = #{homeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njnu.bean.Home" >
+    insert into home (home_id, announcement_ids, recjob_ids, 
+      title, advertisement_ids)
+    values (#{homeId,jdbcType=INTEGER}, #{announcementIds,jdbcType=VARCHAR}, #{recjobIds,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{advertisementIds,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.njnu.bean.Home" >
+    insert into home
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="homeId != null" >
+        home_id,
+      </if>
+      <if test="announcementIds != null" >
+        announcement_ids,
+      </if>
+      <if test="recjobIds != null" >
+        recjob_ids,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="advertisementIds != null" >
+        advertisement_ids,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="homeId != null" >
+        #{homeId,jdbcType=INTEGER},
+      </if>
+      <if test="announcementIds != null" >
+        #{announcementIds,jdbcType=VARCHAR},
+      </if>
+      <if test="recjobIds != null" >
+        #{recjobIds,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="advertisementIds != null" >
+        #{advertisementIds,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.njnu.bean.Home" >
+    update home
+    <set >
+      <if test="announcementIds != null" >
+        announcement_ids = #{announcementIds,jdbcType=VARCHAR},
+      </if>
+      <if test="recjobIds != null" >
+        recjob_ids = #{recjobIds,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="advertisementIds != null" >
+        advertisement_ids = #{advertisementIds,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where home_id = #{homeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.njnu.bean.Home" >
+    update home
+    set announcement_ids = #{announcementIds,jdbcType=VARCHAR},
+      recjob_ids = #{recjobIds,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      advertisement_ids = #{advertisementIds,jdbcType=VARCHAR}
+    where home_id = #{homeId,jdbcType=INTEGER}
+  </update>
+</mapper>

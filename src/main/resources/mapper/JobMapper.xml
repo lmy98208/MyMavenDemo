@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njnu.dao.JobMapper" >
+  <resultMap id="BaseResultMap" type="com.njnu.bean.Job" >
+    <id column="job_id" property="jobId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="corp_id" property="corpId" jdbcType="INTEGER" />
+    <result column="job_address" property="jobAddress" jdbcType="VARCHAR" />
+    <result column="experience" property="experience" jdbcType="TINYINT" />
+    <result column="education" property="education" jdbcType="TINYINT" />
+    <result column="salary_top" property="salaryTop" jdbcType="INTEGER" />
+    <result column="salary_low" property="salaryLow" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="requirement" property="requirement" jdbcType="VARCHAR" />
+    <result column="gmt_release" property="gmtRelease" jdbcType="DATE" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="job_kind_id" property="jobKindId" jdbcType="INTEGER" />
+    <result column="job_name" property="jobName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    job_id, user_id, corp_id, job_address, experience, education, salary_top, salary_low, 
+    description, requirement, gmt_release, gmt_create, gmt_modified, job_kind_id, job_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from job
+    where job_id = #{jobId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from job
+    where job_id = #{jobId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njnu.bean.Job" >
+    insert into job (job_id, user_id, corp_id, 
+      job_address, experience, education, 
+      salary_top, salary_low, description, 
+      requirement, gmt_release, gmt_create, 
+      gmt_modified, job_kind_id, job_name
+      )
+    values (#{jobId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{corpId,jdbcType=INTEGER}, 
+      #{jobAddress,jdbcType=VARCHAR}, #{experience,jdbcType=TINYINT}, #{education,jdbcType=TINYINT}, 
+      #{salaryTop,jdbcType=INTEGER}, #{salaryLow,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, 
+      #{requirement,jdbcType=VARCHAR}, #{gmtRelease,jdbcType=DATE}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModified,jdbcType=TIMESTAMP}, #{jobKindId,jdbcType=INTEGER}, #{jobName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.njnu.bean.Job" >
+    insert into job
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jobId != null" >
+        job_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="corpId != null" >
+        corp_id,
+      </if>
+      <if test="jobAddress != null" >
+        job_address,
+      </if>
+      <if test="experience != null" >
+        experience,
+      </if>
+      <if test="education != null" >
+        education,
+      </if>
+      <if test="salaryTop != null" >
+        salary_top,
+      </if>
+      <if test="salaryLow != null" >
+        salary_low,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="requirement != null" >
+        requirement,
+      </if>
+      <if test="gmtRelease != null" >
+        gmt_release,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="jobKindId != null" >
+        job_kind_id,
+      </if>
+      <if test="jobName != null" >
+        job_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jobId != null" >
+        #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="corpId != null" >
+        #{corpId,jdbcType=INTEGER},
+      </if>
+      <if test="jobAddress != null" >
+        #{jobAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null" >
+        #{experience,jdbcType=TINYINT},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=TINYINT},
+      </if>
+      <if test="salaryTop != null" >
+        #{salaryTop,jdbcType=INTEGER},
+      </if>
+      <if test="salaryLow != null" >
+        #{salaryLow,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="requirement != null" >
+        #{requirement,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtRelease != null" >
+        #{gmtRelease,jdbcType=DATE},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobKindId != null" >
+        #{jobKindId,jdbcType=INTEGER},
+      </if>
+      <if test="jobName != null" >
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.njnu.bean.Job" >
+    update job
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="corpId != null" >
+        corp_id = #{corpId,jdbcType=INTEGER},
+      </if>
+      <if test="jobAddress != null" >
+        job_address = #{jobAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null" >
+        experience = #{experience,jdbcType=TINYINT},
+      </if>
+      <if test="education != null" >
+        education = #{education,jdbcType=TINYINT},
+      </if>
+      <if test="salaryTop != null" >
+        salary_top = #{salaryTop,jdbcType=INTEGER},
+      </if>
+      <if test="salaryLow != null" >
+        salary_low = #{salaryLow,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="requirement != null" >
+        requirement = #{requirement,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtRelease != null" >
+        gmt_release = #{gmtRelease,jdbcType=DATE},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobKindId != null" >
+        job_kind_id = #{jobKindId,jdbcType=INTEGER},
+      </if>
+      <if test="jobName != null" >
+        job_name = #{jobName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where job_id = #{jobId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.njnu.bean.Job" >
+    update job
+    set user_id = #{userId,jdbcType=INTEGER},
+      corp_id = #{corpId,jdbcType=INTEGER},
+      job_address = #{jobAddress,jdbcType=VARCHAR},
+      experience = #{experience,jdbcType=TINYINT},
+      education = #{education,jdbcType=TINYINT},
+      salary_top = #{salaryTop,jdbcType=INTEGER},
+      salary_low = #{salaryLow,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      requirement = #{requirement,jdbcType=VARCHAR},
+      gmt_release = #{gmtRelease,jdbcType=DATE},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      job_kind_id = #{jobKindId,jdbcType=INTEGER},
+      job_name = #{jobName,jdbcType=VARCHAR}
+    where job_id = #{jobId,jdbcType=INTEGER}
+  </update>
+</mapper>
