@@ -17,6 +17,9 @@
     from home
     where home_id = #{homeId,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from home
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from home
     where home_id = #{homeId,jdbcType=INTEGER}

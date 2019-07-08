@@ -1,7 +1,6 @@
 package com.njnu.dao;
 
 import com.njnu.bean.Corporation;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -19,4 +18,6 @@ public interface CorporationMapper {
     int updateByPrimaryKey(Corporation record);
 
     List<Corporation> selectAll();
+
+    List<String> selectLocation();
 }

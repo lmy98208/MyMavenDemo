@@ -2,6 +2,8 @@ package com.njnu.dao;
 
 import com.njnu.bean.Announcement;
 
+import java.util.List;
+
 public interface AnnouncementMapper {
     int deleteByPrimaryKey(Integer announcementId);
 
@@ -14,4 +16,6 @@ public interface AnnouncementMapper {
     int updateByPrimaryKeySelective(Announcement record);
 
     int updateByPrimaryKey(Announcement record);
+    List<Announcement> selectAll();
+
 }

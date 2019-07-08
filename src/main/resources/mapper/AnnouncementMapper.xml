@@ -15,6 +15,9 @@
     from announcement
     where announcement_id = #{announcementId,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from announcement
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from announcement
     where announcement_id = #{announcementId,jdbcType=INTEGER}

@@ -12,11 +12,15 @@
   <sql id="Base_Column_List" >
     comment_id, user_id, comment, time, comment_corp, comment_job
   </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from comment
     where comment_id = #{commentId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from comment
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from comment
@@ -94,6 +98,7 @@
     </set>
     where comment_id = #{commentId,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.njnu.bean.Comment" >
     update comment
     set user_id = #{userId,jdbcType=INTEGER},

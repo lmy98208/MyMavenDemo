@@ -12,16 +12,56 @@
     <result column="salary_low" property="salaryLow" jdbcType="INTEGER" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="requirement" property="requirement" jdbcType="VARCHAR" />
-    <result column="gmt_release" property="gmtRelease" jdbcType="DATE" />
+    <result column="gmt_release" property="gmtRelease" javaType="java.util.Date" jdbcType="DATE" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
     <result column="job_kind_id" property="jobKindId" jdbcType="INTEGER" />
     <result column="job_name" property="jobName" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="InfoResultMap" type="com.njnu.util.JobInfo" >
+    <id column="job_id" property="jobId" jdbcType="INTEGER" />
+    <result column="job_address" property="jobAddress" jdbcType="VARCHAR" />
+    <result column="experience" property="experience" jdbcType="TINYINT" />
+    <result column="education" property="education" jdbcType="TINYINT" />
+    <result column="salary_top" property="salaryTop" jdbcType="INTEGER" />
+    <result column="salary_low" property="salaryLow" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="requirement" property="requirement" jdbcType="VARCHAR" />
+    <result column="gmt_release" property="gmtRelease" javaType="java.util.Date" jdbcType="DATE" />
+    <result column="k1" property="jobKind1" jdbcType="VARCHAR" />
+    <result column="k2" property="jobKind2" jdbcType="VARCHAR" />
+    <result column="k3" property="jobKind3" jdbcType="VARCHAR" />
+    <result column="job_name" property="jobName" jdbcType="VARCHAR" />
+    <result column="corp_name" property="infoCorpName" jdbcType="VARCHAR" />
+    <result column="user_name" property="infoUserName" jdbcType="VARCHAR" />
+  </resultMap>
   <sql id="Base_Column_List" >
     job_id, user_id, corp_id, job_address, experience, education, salary_top, salary_low, 
     description, requirement, gmt_release, gmt_create, gmt_modified, job_kind_id, job_name
   </sql>
+
+  <!-- 业务逻辑 -->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from job
+  </select>
+
+  <select id="selectAllInfo" resultMap="InfoResultMap">
+    select a.job_id, a.job_address, a.experience, a.education, a.salary_top, a.salary_low,
+    a.description, a.requirement, a.gmt_release,
+    d.k1,d.k2,d.k3 ,a.job_name, b.corp_name,c.user_name
+        from job a join corporation b JOIN user c join job_classify d
+        ON a.corp_id=b.corp_id and a.user_id=c.user_id and a.job_kind_id=d.job_kind_id
+  </select>
+
+  <select id="findByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from job
+    where job_name = #{jobName,jdbcType=VARCHAR}
+  </select>
+
+
+  <!-- 自动生成sql -->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

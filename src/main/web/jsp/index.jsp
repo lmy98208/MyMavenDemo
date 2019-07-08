@@ -35,6 +35,14 @@
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
 
                 <li class="layui-nav-item">
+                    <a href="javascript:;">用户管理</a>
+                    <dl class="layui-nav-child">
+                        <dd class="layui-nav-item leftdaohang" data-url="<%=basePath%>jsp/user/userInfoTable.jsp"
+                            mytitle="用户信息"><a>用户信息</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
                     <a href="javascript:;">公司管理</a>
                     <dl class="layui-nav-child">
                         <dd class="layui-nav-item leftdaohang" data-url="<%=basePath%>jsp/corp/infotable.jsp"
@@ -49,8 +57,48 @@
                     <dl class="layui-nav-child">
                         <dd class="layui-nav-item leftdaohang" data-url="<%=basePath%>jsp/jobClassify/infotable.jsp"
                             mytitle="职位分类信息"><a>职位分类信息</a></dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item">
+                    <a href="javascript:;">职位管理</a>
+                    <dl class="layui-nav-child">
+                        <dd class="layui-nav-item leftdaohang" data-url="<%=basePath%>jsp/job/myinfotable.jsp"
+                            mytitle="职位信息"><a>职位信息</a></dd>
                         <%--<dd class="layui-nav-item leftdaohang" data-url="<%=basePath%>jsp/jobClassify/infopic.jsp"--%>
-                            <%--mytitle="职位分类信息可视化"><a>职位分类信息可视化</a></dd>--%>
+                        <%--mytitle="职位分类信息可视化"><a>职位分类信息可视化</a></dd>--%>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">首页管理</a>
+                    <dl class="layui-nav-child">
+                        <dd class="layui-nav-item leftdaohang" data-url="<%=basePath%>jsp/home/infotable.jsp"
+                            mytitle="首页信息"><a>首页信息</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">公告管理</a>
+                    <dl class="layui-nav-child">
+                        <dd class="layui-nav-item leftdaohang" data-url="<%=basePath%>jsp/ann/infotable.jsp"
+                            mytitle="公告信息"><a>公告信息</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">广告管理</a>
+                    <dl class="layui-nav-child">
+                        <dd class="layui-nav-item leftdaohang" data-url="<%=basePath%>jsp/adv/infotable.jsp"
+                            mytitle="广告信息"><a>广告信息</a>
+                        </dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item">
+                    <a href="javascript:;">评论管理</a>
+                    <dl class="layui-nav-child">
+                        <dd class="layui-nav-item leftdaohang" data-url="<%=basePath%>jsp/comment/comment.jsp"
+                            mytitle="评论信息"><a>评论信息</a></dd>
                     </dl>
                 </li>
             </ul>

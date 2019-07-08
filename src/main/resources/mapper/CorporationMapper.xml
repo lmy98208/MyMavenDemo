@@ -13,10 +13,19 @@
     <result column="legal_person" property="legalPerson" jdbcType="VARCHAR" />
     <result column="bussiness_scope" property="bussinessScope" jdbcType="VARCHAR" />
   </resultMap>
+
+  <!--<resultMap id="LocationInfo" type="com.njnu.util.LocationInfo">-->
+    <!--<result column="corp_name" property="corpname" jdbcType="VARCHAR"/>-->
+    <!--<result column="address_lng_lat" property="address" jdbcType="VARCHAR" />-->
+  <!--</resultMap>-->
+
   <sql id="Base_Column_List" >
     corp_id, corp_name, corp_scale, tag, address, address_lng_lat, introduction, full_crop_name, 
     legal_person, bussiness_scope
   </sql>
+  <select id="selectLocation" resultType="java.lang.String">
+    select address_lng_lat from corporation
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

@@ -17,7 +17,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="<%=basePath%>static/plugin/layui/css/layui.css">
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=gCGOXNZjGKeWRv3a6y7jIMfZosgrMdFq"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak="></script>
 </head>
 <body>
     <%--顶部--%>

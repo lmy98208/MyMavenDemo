@@ -4,15 +4,17 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.njnu.bean.Corporation;
 import com.njnu.dao.CorporationMapper;
+import com.njnu.util.AddressInfo;
 import com.njnu.util.ResultBean;
 import com.njnu.util.TableModel;
-import jdk.nashorn.internal.runtime.regexp.RegExp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping("corp")
@@ -93,6 +95,28 @@ public class CorpController {
         return corporation;
     }
 
+    @RequestMapping("findlLocation")
+    @ResponseBody
+    public Object findlLocation(){
+        List<String> list=mapper.selectLocation();
+        List<AddressInfo> addlsit=new ArrayList<>();
+        for(int i=0;i<list.size();i++){
+            String []point=list.get(i).split(",");
+            AddressInfo addressInfo=new AddressInfo();
+            addressInfo.setLng(point[0]);
+            addressInfo.setLat(point[1]);
+            Random random = new Random();
+            addressInfo.setCount(random.nextInt(250 - 50 + 1) + 50);
+            addlsit.add(addressInfo);
+        }
+        return addlsit;
+    }
+
+    @RequestMapping("listCorp")
+    @ResponseBody
+    public List<Corporation> findAll(){
+        return mapper.selectAll();
+    }
     /**
      * 返回码
      * @param strId

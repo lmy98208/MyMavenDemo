@@ -2,6 +2,8 @@ package com.njnu.dao;
 
 import com.njnu.bean.Home;
 
+import java.util.List;
+
 public interface HomeMapper {
     int deleteByPrimaryKey(Integer homeId);
 
@@ -14,4 +16,5 @@ public interface HomeMapper {
     int updateByPrimaryKeySelective(Home record);
 
     int updateByPrimaryKey(Home record);
+    List<Home> selectAll();
 }
